@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="app/src/main/res/drawable/ic_email.xml" value="0.209375" />
+        <entry key="app/src/main/res/drawable/ic_email_focused.xml" value="0.209375" />
+        <entry key="app/src/main/res/drawable/ic_email_selector.xml" value="0.209375" />
+        <entry key="app/src/main/res/drawable/ic_lock.xml" value="0.209375" />
+        <entry key="app/src/main/res/drawable/ic_lock_focused.xml" value="0.209375" />
+        <entry key="app/src/main/res/drawable/ic_lock_selector.xml" value="0.209375" />
+        <entry key="app/src/main/res/drawable/input_field.xml" value="0.209375" />
+        <entry key="app/src/main/res/drawable/styled_button.xml" value="0.209375" />
+        <entry key="app/src/main/res/drawable/vertical_gap.xml" value="0.209375" />
+        <entry key="app/src/main/res/layout/activity_home.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/activity_login.xml" value="0.22" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/activity_register.xml" value="0.25" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/build/classes" />
+  </component>
+  <component name="ProjectType">
+    <option name="id" value="Android" />
+  </component>
+</project>
