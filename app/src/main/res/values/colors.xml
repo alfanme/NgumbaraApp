@@ -13,4 +13,7 @@
     <color name="pink_400">#F472B6</color>
     <color name="gray_100">#F3F4F6</color>
     <color name="gray_400">#9CA3AF</color>
+    <color name="avocado_green">#AEC346</color>
+    <color name="avocado_darker_green">#9DAB57</color>
+    <color name="red_500">#EF4444</color>
 </resources>

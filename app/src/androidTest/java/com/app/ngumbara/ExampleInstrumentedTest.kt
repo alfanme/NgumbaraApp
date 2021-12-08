@@ -1,4 +1,4 @@
-package com.app.travis
+package com.app.ngumbara
 
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4

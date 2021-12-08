@@ -1,4 +1,4 @@
-package com.app.travis
+package com.app.ngumbara
 
 import org.junit.Test
 
