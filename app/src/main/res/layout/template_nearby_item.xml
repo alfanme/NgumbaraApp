@@ -34,30 +34,51 @@
             android:id="@+id/place_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@id/thumbnail_image"
+            app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             android:text="Place Name"
             android:textColor="@color/black"
             android:textStyle="bold"
             android:textSize="24sp"
             />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Open"
-            app:layout_constraintTop_toBottomOf="@id/place_name"
-            app:layout_constraintLeft_toLeftOf="parent"
-            android:textColor="@color/black"
-            />
 
         <TextView
+            android:id="@+id/open_status"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="4.5"
+            app:layout_constraintTop_toBottomOf="@id/place_name"
+            app:layout_constraintLeft_toLeftOf="parent"
+            android:text="Open"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             app:layout_constraintTop_toBottomOf="@id/place_name"
             app:layout_constraintRight_toRightOf="parent"
-            android:textColor="@color/black"
-            />
+            android:gravity="center_vertical">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_rate_star"
+                android:layout_marginRight="4dp"
+                />
+
+            <TextView
+                android:id="@+id/rate_number"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="4.5"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:textColor="@color/black"
+                />
+
+        </LinearLayout>
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 

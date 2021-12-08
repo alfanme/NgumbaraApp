@@ -5,6 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.app.ngumbara.Model.Results
 import com.bumptech.glide.Glide
@@ -32,6 +33,14 @@ class NearbyAdapter(private  val nearbyList: ArrayList<Results>) :
 
         Glide.with(holder.itemView.context).load(photoUrl.toString()).into(holder.thumbnailImage)
         holder.placeName.text = currentItem.name
+        if(currentItem.opening_hours?.open_now == true) {
+            holder.openStatus.text = "Open Now"
+            holder.openStatus.setTextColor(ContextCompat.getColor(holder.itemView.context, R.color.avocado_green))
+        } else {
+            holder.openStatus.text = "Closed"
+            holder.openStatus.setTextColor(ContextCompat.getColor(holder.itemView.context, R.color.red_500))
+        }
+        holder.rateNumber.text = currentItem.rating.toString()
     }
 
     override fun getItemCount(): Int {
@@ -42,6 +51,8 @@ class NearbyAdapter(private  val nearbyList: ArrayList<Results>) :
 
         val thumbnailImage: ImageView = itemView.findViewById(R.id.thumbnail_image)
         val placeName: TextView = itemView.findViewById(R.id.place_name)
+        val openStatus: TextView = itemView.findViewById(R.id.open_status)
+        val rateNumber: TextView = itemView.findViewById(R.id.rate_number)
 
     }
 

@@ -13,6 +13,8 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import java.lang.StringBuilder
+import java.util.*
+import kotlin.collections.ArrayList
 
 class NearbyActivity : AppCompatActivity() {
     private lateinit var binding: ActivityNearbyBinding
@@ -28,6 +30,9 @@ class NearbyActivity : AppCompatActivity() {
         val latitude = this.intent.getDoubleExtra("latitude", 0.0)
         val longitude = this.intent.getDoubleExtra("longitude", 0.0)
         val typePlace = this.intent.getStringExtra("typePlace")
+
+        binding.backButton.setOnClickListener { finish() }
+        binding.headerTitle.text = "Nearby ${typePlace!!.capitalize()}s"
 
         binding.nearbyRecyclerView.layoutManager = LinearLayoutManager(this)
         binding.nearbyRecyclerView.setHasFixedSize(true)

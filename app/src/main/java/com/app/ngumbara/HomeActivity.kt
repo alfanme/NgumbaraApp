@@ -36,67 +36,67 @@ class HomeActivity : AppCompatActivity() {
         if(auth.currentUser == null){
             startActivity(Intent(this, AuthActivity::class.java))
             finish()
-        }
+        } else {
+            user = auth.currentUser!!
 
-        user = auth.currentUser!!
+            retrieveAndDisplayPhoto()
 
-        retrieveAndDisplayPhoto()
+            binding.displayName.text = user.displayName
+            binding.logoutButton.setOnClickListener { logoutAccount() }
 
-        binding.displayName.text = user.displayName
-        binding.logoutButton.setOnClickListener { logoutAccount() }
+            fusedLocationProviderClient =  LocationServices.getFusedLocationProviderClient(this)
+            fetchCurrentLocation()
 
-        fusedLocationProviderClient =  LocationServices.getFusedLocationProviderClient(this)
-        fetchCurrentLocation()
+            binding.currentLocation.isSelected = true
 
-        binding.currentLocation.isSelected = true
+            binding.editProfileButton.setOnClickListener {
+                startActivity(Intent(this, EditProfileActivity::class.java))
+                finish()
+            }
 
-        binding.editProfileButton.setOnClickListener {
-            startActivity(Intent(this, EditProfileActivity::class.java))
-            finish()
-        }
+            binding.tourButton.setOnClickListener {
+                val intent = Intent(this, NearbyActivity::class.java)
+                intent.putExtra("latitude", latitude)
+                intent.putExtra("longitude", longitude)
+                intent.putExtra("typePlace", "tourism")
+                startActivity(intent)
+            }
 
-        binding.tourButton.setOnClickListener {
-            val intent = Intent(this, NearbyActivity::class.java)
-            intent.putExtra("latitude", latitude)
-            intent.putExtra("longitude", longitude)
-            intent.putExtra("typePlace", "tourism")
-            startActivity(intent)
-        }
+            binding.searchButton.setOnClickListener {
+                startActivity(Intent(this, MapsActivity::class.java))
+            }
 
-        binding.searchButton.setOnClickListener {
-            startActivity(Intent(this, MapsActivity::class.java))
-        }
+            binding.restaurantButton.setOnClickListener {
+                val intent = Intent(this, NearbyActivity::class.java)
+                intent.putExtra("latitude", latitude)
+                intent.putExtra("longitude", longitude)
+                intent.putExtra("typePlace", "restaurant")
+                startActivity(intent)
+            }
 
-        binding.restaurantButton.setOnClickListener {
-            val intent = Intent(this, NearbyActivity::class.java)
-            intent.putExtra("latitude", latitude)
-            intent.putExtra("longitude", longitude)
-            intent.putExtra("typePlace", "restaurant")
-            startActivity(intent)
-        }
+            binding.marketButton.setOnClickListener {
+                val intent = Intent(this, NearbyActivity::class.java)
+                intent.putExtra("latitude", latitude)
+                intent.putExtra("longitude", longitude)
+                intent.putExtra("typePlace", "market")
+                startActivity(intent)
+            }
 
-        binding.marketButton.setOnClickListener {
-            val intent = Intent(this, NearbyActivity::class.java)
-            intent.putExtra("latitude", latitude)
-            intent.putExtra("longitude", longitude)
-            intent.putExtra("typePlace", "market")
-            startActivity(intent)
-        }
+            binding.hotelButton.setOnClickListener {
+                val intent = Intent(this, NearbyActivity::class.java)
+                intent.putExtra("latitude", latitude)
+                intent.putExtra("longitude", longitude)
+                intent.putExtra("typePlace", "hotel")
+                startActivity(intent)
+            }
 
-        binding.hotelButton.setOnClickListener {
-            val intent = Intent(this, NearbyActivity::class.java)
-            intent.putExtra("latitude", latitude)
-            intent.putExtra("longitude", longitude)
-            intent.putExtra("typePlace", "hotel")
-            startActivity(intent)
-        }
-
-        binding.shoppingButton.setOnClickListener {
-            val intent = Intent(this, NearbyActivity::class.java)
-            intent.putExtra("latitude", latitude)
-            intent.putExtra("longitude", longitude)
-            intent.putExtra("typePlace", "mall")
-            startActivity(intent)
+            binding.shoppingButton.setOnClickListener {
+                val intent = Intent(this, NearbyActivity::class.java)
+                intent.putExtra("latitude", latitude)
+                intent.putExtra("longitude", longitude)
+                intent.putExtra("typePlace", "mall")
+                startActivity(intent)
+            }
         }
     }
 

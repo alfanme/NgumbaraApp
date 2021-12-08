@@ -31,6 +31,7 @@
         <entry key="app/src/main/res/drawable/ic_person.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/ic_person_focused.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/ic_person_selector.xml" value="0.1638888888888889" />
+        <entry key="app/src/main/res/drawable/ic_rate_star.xml" value="0.18697916666666667" />
         <entry key="app/src/main/res/drawable/ic_restaurant.xml" value="0.18697916666666667" />
         <entry key="app/src/main/res/drawable/ic_search.xml" value="0.18697916666666667" />
         <entry key="app/src/main/res/drawable/ic_settings.xml" value="0.18697916666666667" />
@@ -55,7 +56,7 @@
         <entry key="app/src/main/res/layout/fragment_login_dialog_list_dialog_item.xml" value="0.11277173913043478" />
         <entry key="app/src/main/res/layout/fragment_maps.xml" value="0.10914855072463768" />
         <entry key="app/src/main/res/layout/fragment_register.xml" value="0.1" />
-        <entry key="app/src/main/res/layout/template_nearby_item.xml" value="0.2" />
+        <entry key="app/src/main/res/layout/template_nearby_item.xml" value="0.25" />
         <entry key="app/src/main/res/menu/bottom_menu.xml" value="0.17083333333333334" />
       </map>
     </option>
