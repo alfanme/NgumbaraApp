@@ -7,6 +7,35 @@
   "client": [
     {
       "client_info": {
+        "mobilesdk_app_id": "1:824763258673:android:271ec25dcbbd28b6d84210",
+        "android_client_info": {
+          "package_name": "com.app.ngumbara"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "824763258673-luab52iligom6u34jmmcl7m6532hj6ip.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCjJ8ZaUENH9Q5OpqPbLv50mHvSzgg9JUs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "824763258673-luab52iligom6u34jmmcl7m6532hj6ip.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
         "mobilesdk_app_id": "1:824763258673:android:cb392319cc063d71d84210",
         "android_client_info": {
           "package_name": "com.app.travis"

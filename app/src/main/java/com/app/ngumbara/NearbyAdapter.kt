@@ -1,25 +1,40 @@
 package com.app.ngumbara
 
+import android.opengl.Visibility
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.app.ngumbara.Model.Results
 import com.bumptech.glide.Glide
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 import java.lang.StringBuilder
 
 class NearbyAdapter(private  val nearbyList: ArrayList<Results>) :
     RecyclerView.Adapter<NearbyAdapter.NearbyViewHolder>() {
+
+    private lateinit var mListener: onItemClickListener
+
+    interface onItemClickListener {
+        fun onItemClick(position: Int)
+    }
+
+    fun setOnItemClickListener(listener: onItemClickListener) {
+        mListener = listener
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NearbyViewHolder {
         val itemView = LayoutInflater.from(parent.context).inflate(
             R.layout.template_nearby_item,
             parent,
             false)
-        return NearbyViewHolder(itemView)
+        return NearbyViewHolder(itemView, mListener)
     }
 
     override fun onBindViewHolder(holder: NearbyViewHolder, position: Int) {
@@ -41,19 +56,44 @@ class NearbyAdapter(private  val nearbyList: ArrayList<Results>) :
             holder.openStatus.setTextColor(ContextCompat.getColor(holder.itemView.context, R.color.red_500))
         }
         holder.rateNumber.text = currentItem.rating.toString()
+
+        val db = Firebase.firestore
+        db.collection("halalPlaces")
+            .document(currentItem.place_id!!)
+            .addSnapshotListener { snapshot, error ->
+                if (error != null) {
+                    Log.w("SNAPSHOT_ERROR", "Listen failed.", error)
+                    return@addSnapshotListener
+                }
+
+                if (snapshot != null && snapshot.exists()) {
+                    holder.halalIcon.setColorFilter(ContextCompat.getColor(holder.itemView.context, R.color.green_500))
+                    holder.halalStatus.text = "Halal"
+                } else {
+                    holder.halalIcon.setColorFilter(ContextCompat.getColor(holder.itemView.context, R.color.gray_400))
+                    holder.halalStatus.text = "Not verified"
+                }
+            }
     }
 
     override fun getItemCount(): Int {
         return nearbyList.size
     }
 
-    class NearbyViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
+    class NearbyViewHolder(itemView: View, listener: onItemClickListener): RecyclerView.ViewHolder(itemView) {
 
         val thumbnailImage: ImageView = itemView.findViewById(R.id.thumbnail_image)
         val placeName: TextView = itemView.findViewById(R.id.place_name)
         val openStatus: TextView = itemView.findViewById(R.id.open_status)
         val rateNumber: TextView = itemView.findViewById(R.id.rate_number)
+        val halalIcon: ImageView = itemView.findViewById(R.id.halal_icon)
+        val halalStatus: TextView = itemView.findViewById(R.id.halal_status)
 
+        init {
+            itemView.setOnClickListener {
+                listener.onItemClick(adapterPosition)
+            }
+        }
     }
 
 }

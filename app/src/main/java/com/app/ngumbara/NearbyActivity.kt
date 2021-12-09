@@ -1,14 +1,19 @@
 package com.app.ngumbara
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.app.ngumbara.Common.Common
 import com.app.ngumbara.Model.MyPlaces
 import com.app.ngumbara.Model.Results
 import com.app.ngumbara.Remote.IGoogleAPIService
 import com.app.ngumbara.databinding.ActivityNearbyBinding
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -20,6 +25,7 @@ class NearbyActivity : AppCompatActivity() {
     private lateinit var binding: ActivityNearbyBinding
     private lateinit var nearbyList: ArrayList<Results>
     private lateinit var mService: IGoogleAPIService
+    private lateinit var nearbyRecyclerView: RecyclerView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,22 +33,26 @@ class NearbyActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         mService = Common.googleApiService
-        val latitude = this.intent.getDoubleExtra("latitude", 0.0)
-        val longitude = this.intent.getDoubleExtra("longitude", 0.0)
-        val typePlace = this.intent.getStringExtra("typePlace")
+
+        val bundle: Bundle = intent.extras!!
+        val latitude = bundle.getDouble("latitude", 0.0)
+        val longitude = bundle.getDouble("longitude", 0.0)
+        val typePlace = bundle.getString("typePlace")
 
         binding.backButton.setOnClickListener { finish() }
         binding.headerTitle.text = "Nearby ${typePlace!!.capitalize()}s"
 
-        binding.nearbyRecyclerView.layoutManager = LinearLayoutManager(this)
-        binding.nearbyRecyclerView.setHasFixedSize(true)
+        nearbyRecyclerView = findViewById(R.id.nearby_recycler_view)
+        nearbyRecyclerView.layoutManager = LinearLayoutManager(this)
+        nearbyRecyclerView.setHasFixedSize(true)
         nearbyList = arrayListOf<Results>()
-        getNearByPlaceData(latitude, longitude, typePlace!!)
+        getNearByPlaceData(latitude, longitude, typePlace)
     }
 
     private fun getNearByPlaceData(latitude: Double, longitude: Double, typePlace: String) {
 
         val url = getUrl(latitude,longitude, typePlace)
+        Log.d("URL_DEBUG", url)
 
         mService.getNearbyPlaces(url)
             .enqueue(object : Callback<MyPlaces> {
@@ -52,12 +62,32 @@ class NearbyActivity : AppCompatActivity() {
                 ) {
                     if (response.isSuccessful) {
                         val results = response.body()!!.results!!
+
                         for (i in results.indices) {
                             val nearbyPlaces = results[i]
                             nearbyList.add(nearbyPlaces)
                         }
 
-                        binding.nearbyRecyclerView.adapter = NearbyAdapter(nearbyList)
+                        val adapter = NearbyAdapter(nearbyList)
+                        nearbyRecyclerView.adapter = adapter
+                        adapter.setOnItemClickListener(object: NearbyAdapter.onItemClickListener {
+                            override fun onItemClick(position: Int) {
+                                val intent = Intent(this@NearbyActivity, PlaceDetailsActivity::class.java)
+                                intent.putExtra("placeId", results[position].place_id)
+                                intent.putExtra("photoReference",
+                                    results[position].photos?.get(0)?.photo_reference
+                                )
+                                intent.putExtra("placeName", results[position].name)
+                                intent.putExtra("rateNumber", results[position].rating)
+                                intent.putExtra("openStatus", results[position].opening_hours?.open_now)
+                                intent.putExtra("currentLat", latitude)
+                                intent.putExtra("currentLng", longitude)
+                                intent.putExtra("destinationLat", results[position].geometry?.location?.lat)
+                                intent.putExtra("destinationLng", results[position].geometry?.location?.lng)
+
+                                startActivity(intent)
+                            }
+                        })
                     }
                 }
 

@@ -158,7 +158,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
                                 )
                             )
                         )
-                        mMap.animateCamera((CameraUpdateFactory.zoomTo(11f)))
+                        mMap.animateCamera((CameraUpdateFactory.zoomTo(12f)))
                     }
                 }
 
@@ -212,7 +212,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
                 //Move Camera
                 mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng))
-                mMap.animateCamera(CameraUpdateFactory.zoomTo(11f))
+                mMap.animateCamera(CameraUpdateFactory.zoomTo(12f))
             }
 
 
@@ -231,11 +231,10 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         locationRequest.interval = 5000
         locationRequest.fastestInterval = 3000
         locationRequest.smallestDisplacement = 10f
-
     }
 
     private fun checkLocationPermission() : Boolean{
-
+        Log.d("Permission Activity", "Maps Activity")
         return if(ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             if(ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.ACCESS_FINE_LOCATION))
                 ActivityCompat.requestPermissions(this, arrayOf(
