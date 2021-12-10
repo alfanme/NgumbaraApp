@@ -9,7 +9,10 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.app.ngumbara.databinding.FragmentRegisterBinding
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.UserProfileChangeRequest
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 
 class RegisterFragment: Fragment() {
     private var _binding: FragmentRegisterBinding? = null
