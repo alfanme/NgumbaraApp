@@ -1,3 +1,3 @@
 # NgumbaraApp
 
-Aplikasi dapat diunduh melalui link [ini](https://drive.google.com/file/d/129ifJQz4zyjwxiwgdY2Ei7f5rQWiR6Kx/view?usp=sharing).
+Aplikasi dapat diunduh melalui link [ini](https://drive.google.com/file/d/1MAJy4noPnHEO5Pu9C7SnqgtmdS_g0Ipf/view?usp=sharing).
