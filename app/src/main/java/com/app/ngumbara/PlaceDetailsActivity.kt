@@ -71,6 +71,9 @@ class PlaceDetailsActivity : AppCompatActivity() {
 
     private fun startHalalVotesSnapshot(placeId: String?) {
         val db = Firebase.firestore
+        val auth = FirebaseAuth.getInstance()
+        val currentUser = auth.currentUser
+        val userId = currentUser?.uid
         db.collection("halalPlaces")
             .document(placeId!!)
             .addSnapshotListener { snapshot, error ->
@@ -84,8 +87,11 @@ class PlaceDetailsActivity : AppCompatActivity() {
                     val votersId = snapshot.data!!["votersId"] as ArrayList<String>
                     val halalNumber = votersId.size
                     binding.halalNumber.text = "$halalNumber Halal Votes"
-                    binding.voteHalalButton.text = "Halal Voted!"
-                    binding.voteHalalButton.setTextColor(ContextCompat.getColor(applicationContext, R.color.turquoise))
+
+                    if (userId in votersId) {
+                        binding.voteHalalButton.text = "Halal Voted!"
+                        binding.voteHalalButton.setTextColor(ContextCompat.getColor(applicationContext, R.color.turquoise))
+                    }
                 } else {
                     Log.d("CURRENT_DATA_EMPTY", "null")
                 }
